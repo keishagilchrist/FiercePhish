@@ -1,5 +1,5 @@
 <?php
-
+$DATABASE_URL=parse_url('postgres://fwxuszxkarrrma:1f7e481bec4dc8e6a9c7a69dcfd5a9c2a4ccb5a5393eee72d9b64b933048a3a1@ec2-34-206-8-52.compute-1.amazonaws.com:5432/d32r63r4mmbkkt');
 return [
 
     /*
@@ -55,15 +55,15 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', 'ec2-34-206-8-52.compute-1.amazonaws.com'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'd32r63r4mmbkkt'),
-            'username' => env('DB_USERNAME', 'fwxuszxkarrrma'),
-            'password' => env('DB_PASSWORD', '1f7e481bec4dc8e6a9c7a69dcfd5a9c2a4ccb5a5393eee72d9b64b933048a3a1'),
+            'host' => $DATABASE_URL["host"],
+            'port' => $DATABASE_URL["port"],
+            'database' => ltrim($DATABASE_URL["path"], "/"),
+            'username' => $DATABASE_URL["user"],
+            'password' => $DATABASE_URL["pass"],
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => 'require',
         ],
 
     ],
